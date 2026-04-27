@@ -7,5 +7,6 @@
 
     <include file="db/changelog/changes/001-create-people-table.sql" relativeToChangelogFile="false"/>
     <include file="db/changelog/changes/002-create-teams-table.sql" relativeToChangelogFile="false"/>
+    <include file="db/changelog/changes/003-create-batting-table.sql" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
