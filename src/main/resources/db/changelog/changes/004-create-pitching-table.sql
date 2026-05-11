@@ -1,0 +1,36 @@
+--liquibase formatted sql
+
+--changeset owengc:004
+CREATE TABLE pitching (
+    player_id VARCHAR(10) NOT NULL,
+    year_id INTEGER NOT NULL,
+    stint INTEGER NOT NULL,
+    team_id VARCHAR(3) NOT NULL,
+    league_id VARCHAR(5),
+    w INTEGER,
+    l INTEGER,
+    g INTEGER,
+    gs INTEGER,
+    cg INTEGER,
+    sho INTEGER,
+    sv INTEGER,
+    ip_outs INTEGER,
+    h INTEGER,
+    er INTEGER,
+    hr INTEGER,
+    bb INTEGER,
+    so INTEGER,
+    baopp NUMERIC(4,3),
+    era NUMERIC(5,2),
+    ibb INTEGER,
+    wp INTEGER,
+    hbp INTEGER,
+    bk INTEGER,
+    bfp INTEGER,
+    gf INTEGER,
+    r INTEGER,
+    sh INTEGER,
+    sf INTEGER,
+    gidp INTEGER,
+    PRIMARY KEY (player_id, year_id, stint, team_id)
+);
