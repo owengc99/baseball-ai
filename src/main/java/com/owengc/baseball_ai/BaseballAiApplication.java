@@ -1,6 +1,7 @@
 package com.owengc.baseball_ai;
 
 import com.owengc.baseball_ai.service.PeopleLoaderService;
+import com.owengc.baseball_ai.service.TeamsLoaderService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +17,13 @@ public class BaseballAiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner dataLoader(PeopleLoaderService peopleLoaderService) {
+	public CommandLineRunner dataLoader(PeopleLoaderService peopleLoaderService, TeamsLoaderService teamsLoaderService) {
 		return args -> {
-			if (Arrays.asList(args).contains("--load-data")) {
+			if (Arrays.asList(args).contains("--load-people")) {
 				peopleLoaderService.loadPeople();
+			}
+			if (Arrays.asList(args).contains("--load-teams")) {
+				teamsLoaderService.loadTeams();
 			}
 		};
 	}

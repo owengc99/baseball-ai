@@ -3,11 +3,16 @@ package com.owengc.baseball_ai.service;
 import com.opencsv.CSVReaderHeaderAware;
 import com.owengc.baseball_ai.entity.Person;
 import com.owengc.baseball_ai.repository.PersonRepository;
+import org.apache.commons.io.input.BOMInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -28,9 +33,14 @@ public class PeopleLoaderService {
         int count = 0;
         int errors = 0;
 
-        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_PATH))) {
+        try (
+                InputStream is = new FileInputStream(CSV_PATH);
+                BOMInputStream bomStream = BOMInputStream.builder().setInputStream(is).get();
+                Reader reader = new InputStreamReader(bomStream, StandardCharsets.UTF_8);
+                CSVReaderHeaderAware csvReader = new CSVReaderHeaderAware(reader)
+        ) {
             Map<String, String> row;
-            while ((row = reader.readMap()) != null) {
+            while ((row = csvReader.readMap()) != null) {
                 try {
                     Person person = new Person();
                     person.setPlayerId(row.get("playerID"));
