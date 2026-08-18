@@ -2,7 +2,7 @@ package com.owengc.baseball_ai.service;
 
 import com.opencsv.CSVReaderHeaderAware;
 import com.owengc.baseball_ai.entity.Team;
-import com.owengc.baseball_ai.entity.TeamId;
+import com.owengc.baseball_ai.entity.TeamYearId;
 import com.owengc.baseball_ai.repository.TeamRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class TeamsLoaderService {
 
                     Integer yearId = parseInt(row.get("yearID"));
                     String teamId = row.get("teamID");
-                    TeamId id = new TeamId(yearId, teamId);
+                    TeamYearId id = new TeamYearId( teamId, yearId);
                     team.setId(id);
 
                     team.setLeagueId(row.get("lgID"));
@@ -56,7 +56,7 @@ public class TeamsLoaderService {
                     team.setDivId(row.get("divID"));
                     team.setRank(parseInt(row.get("Rank")));
                     team.setG(parseInt(row.get("G")));
-                    team.setgHome(parseInt(row.get("Ghome")));
+                    team.setGHome(parseInt(row.get("Ghome")));
                     team.setW(parseInt(row.get("W")));
                     team.setL(parseInt(row.get("L")));
                     team.setDivWin(row.get("DivWin"));

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class TeamId implements Serializable {
+public class TeamYearId implements Serializable {
 
     @Column(name = "year_id")
     private final Integer yearId;
@@ -16,12 +16,12 @@ public class TeamId implements Serializable {
     private final String teamId;
 
 //    for JPA
-    protected TeamId() {
+    protected TeamYearId() {
         this.yearId = null;
         this.teamId = null;
     }
 
-    public TeamId(Integer yearId, String teamId) {
+    public TeamYearId(String teamId, Integer yearId) {
         this.yearId = yearId;
         this.teamId = teamId;
     }
@@ -39,8 +39,8 @@ public class TeamId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TeamId teamId1 = (TeamId) o;
-        return Objects.equals(yearId, teamId1.yearId) && Objects.equals(teamId, teamId1.teamId);
+        TeamYearId teamYearId1 = (TeamYearId) o;
+        return Objects.equals(yearId, teamYearId1.yearId) && Objects.equals(teamId, teamYearId1.teamId);
     }
 
     @Override

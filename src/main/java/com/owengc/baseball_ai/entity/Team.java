@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class Team {
 
     @EmbeddedId
-    private TeamId id;
+    private TeamYearId id;
 
 
     @Column(name = "league_id", length = 5)
@@ -162,11 +162,11 @@ public class Team {
 
     public Team() {}
 
-    public TeamId getId() {
+    public TeamYearId getId() {
         return id;
     }
 
-    public void setId(TeamId id) {
+    public void setId(TeamYearId id) {
         this.id = id;
     }
 
@@ -210,11 +210,11 @@ public class Team {
         this.g = g;
     }
 
-    public Integer getgHome() {
+    public Integer getGHome() {
         return gHome;
     }
 
-    public void setgHome(Integer gHome) {
+    public void setGHome(Integer gHome) {
         this.gHome = gHome;
     }
 
