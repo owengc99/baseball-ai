@@ -26,18 +26,18 @@ public class BattingService {
         List<Batting> rows = battingRepository
                 .findByIdPlayerIdOrderByIdYearIdAscIdStintAsc(playerId);
 
-        Map<Integer, List<Batting>> byYear = rows.stream()
+        Map<Integer, List<Batting>> seasons = rows.stream()
                 .collect(Collectors.groupingBy(
                         row -> row.getId().getYearId(),
                         TreeMap::new,
                         Collectors.toList()
                 ));
 
-        return byYear.entrySet().stream()
-                .map(entry -> new BattingSeason(
-                        entry.getKey(),
-                        toTotals(entry.getValue()),
-                        entry.getValue().stream().map(this::toStint).toList()
+        return seasons.entrySet().stream()
+                .map(season -> new BattingSeason(
+                        season.getKey(),
+                        toTotals(season.getValue()),
+                        season.getValue().stream().map(this::toStint).toList()
                 ))
                 .toList();
     }
