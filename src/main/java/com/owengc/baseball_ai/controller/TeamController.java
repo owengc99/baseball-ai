@@ -1,5 +1,6 @@
 package com.owengc.baseball_ai.controller;
 
+import com.owengc.baseball_ai.dto.FranchiseSummary;
 import com.owengc.baseball_ai.dto.TeamDetail;
 import com.owengc.baseball_ai.dto.TeamSummary;
 import com.owengc.baseball_ai.service.TeamService;
@@ -29,5 +30,11 @@ public class TeamController {
     @GetMapping("/{teamId}/{yearId}")
     public TeamDetail getTeam(@PathVariable String teamId, @PathVariable Integer yearId){
        return teamService.getTeam(teamId, yearId);
+    }
+
+
+    @GetMapping
+    public List<FranchiseSummary> getFranchises() {
+        return teamService.getFranchises();
     }
 }
