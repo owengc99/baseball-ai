@@ -1,5 +1,6 @@
 package com.owengc.baseball_ai.service;
 
+import com.owengc.baseball_ai.dto.FranchiseSummary;
 import com.owengc.baseball_ai.dto.TeamDetail;
 import com.owengc.baseball_ai.dto.TeamSummary;
 import com.owengc.baseball_ai.entity.Team;
@@ -107,6 +108,10 @@ public class TeamService {
                         team.getPpf()
                 )
         );
+    }
+
+    public List<FranchiseSummary> getFranchises() {
+        return teamRepository.findFranchises();
     }
 
 }
