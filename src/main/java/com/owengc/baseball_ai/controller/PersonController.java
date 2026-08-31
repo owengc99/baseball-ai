@@ -5,12 +5,13 @@ import com.owengc.baseball_ai.service.BattingService;
 import com.owengc.baseball_ai.service.FieldingService;
 import com.owengc.baseball_ai.service.PersonService;
 import com.owengc.baseball_ai.service.PitchingService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/people")
+@RequestMapping(value = "/api/people", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PersonController {
 
     private final PersonService personService;
