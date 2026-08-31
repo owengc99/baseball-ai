@@ -4,6 +4,7 @@ import com.owengc.baseball_ai.dto.FranchiseSummary;
 import com.owengc.baseball_ai.dto.TeamDetail;
 import com.owengc.baseball_ai.dto.TeamSummary;
 import com.owengc.baseball_ai.service.TeamService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/teams")
+@RequestMapping(value = "/api/teams", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TeamController {
 
     private final TeamService teamService;
