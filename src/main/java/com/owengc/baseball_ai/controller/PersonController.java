@@ -1,10 +1,8 @@
 package com.owengc.baseball_ai.controller;
 
-import com.owengc.baseball_ai.dto.BattingSeason;
-import com.owengc.baseball_ai.dto.PersonDetail;
-import com.owengc.baseball_ai.dto.PersonSummary;
-import com.owengc.baseball_ai.dto.PitchingSeason;
+import com.owengc.baseball_ai.dto.*;
 import com.owengc.baseball_ai.service.BattingService;
+import com.owengc.baseball_ai.service.FieldingService;
 import com.owengc.baseball_ai.service.PersonService;
 import com.owengc.baseball_ai.service.PitchingService;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +16,17 @@ public class PersonController {
     private final PersonService personService;
     private final BattingService battingService;
     private final PitchingService pitchingService;
+    private final FieldingService fieldingService;
 
-    public PersonController(PersonService personService, BattingService battingService, PitchingService pitchingService) {
+    public PersonController(PersonService personService,
+                            BattingService battingService,
+                            PitchingService pitchingService,
+                            FieldingService fieldingService
+    ) {
         this.personService = personService;
         this.battingService = battingService;
         this.pitchingService = pitchingService;
+        this.fieldingService = fieldingService;
     }
 
     @GetMapping
@@ -43,5 +47,10 @@ public class PersonController {
     @GetMapping("/{playerId}/pitching")
     public List<PitchingSeason> getPitchingSeasons(@PathVariable String playerId) {
         return pitchingService.getPitchingSeasons(playerId);
+    }
+
+    @GetMapping("/{playerId}/fielding")
+    public List<FieldingSeason> getFieldingSeasons(@PathVariable String playerId) {
+        return fieldingService.getFieldingSeasons(playerId);
     }
 }
