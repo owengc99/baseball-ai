@@ -1,0 +1,23 @@
+name: Notify Forfeit on PR merge to main
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  notify:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compute total lines changed
+        id: size
+        run: |
+          TOTAL=$(( ${{ github.event.pull_request.additions }} + ${{ github.event.pull_request.deletions }} ))
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger IFTTT webhook
+        if: steps.size.outputs.total >= 10
+        run: |
+          curl -X POST "https://maker.ifttt.com/trigger/baseball_ai_main_merged/with/key/${{ secrets.IFTTT_KEY }}"
