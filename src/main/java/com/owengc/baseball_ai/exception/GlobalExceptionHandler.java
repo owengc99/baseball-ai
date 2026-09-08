@@ -1,6 +1,7 @@
 package com.owengc.baseball_ai.exception;
 
 import com.owengc.baseball_ai.dto.ErrorResponse;
+import jakarta.persistence.QueryTimeoutException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,18 @@ public class GlobalExceptionHandler {
                                                             HttpServletRequest request) {
         String message = "Invalid value for parameter '" + ex.getName() + "': " + ex.getValue();
         return build(HttpStatus.BAD_REQUEST, message, request);
+    }
+
+    @ExceptionHandler(InvalidQueryException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidQuery(InvalidQueryException ex,
+                                                            HttpServletRequest request) {
+        return build(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(QueryTimeoutException.class)
+    public ResponseEntity<ErrorResponse> handleTimeout(QueryTimeoutException ex,
+                                                       HttpServletRequest request) {
+        return build(HttpStatus.GATEWAY_TIMEOUT, "Query exceeded the time limit", request);
     }
 
     @ExceptionHandler(Exception.class)

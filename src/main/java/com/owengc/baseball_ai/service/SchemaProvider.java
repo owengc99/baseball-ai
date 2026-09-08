@@ -44,7 +44,6 @@ public class SchemaProvider {
                 .map(e -> formatTable(e.getKey(), e.getValue()))
                 .collect(Collectors.joining("\n"));
 
-        System.out.println(this.schema);   // ← temporary
     }
 
     private String formatTable(String table, List<Object[]> columns) {
