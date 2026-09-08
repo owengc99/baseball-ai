@@ -15,21 +15,30 @@ public class NlQueryService {
 
     private final SqlGenerator sqlGenerator;
     private final EntityManager entityManager;
+    private final SqlValidator sqlValidator;
 
-    public NlQueryService(SqlGenerator sqlGenerator, EntityManager entityManager) {
+    public NlQueryService(SqlGenerator sqlGenerator,
+                          EntityManager entityManager,
+                          SqlValidator sqlValidator) {
         this.sqlGenerator = sqlGenerator;
         this.entityManager = entityManager;
+        this.sqlValidator = sqlValidator;
     }
 
     @Transactional(readOnly = true)
     public QueryResult ask(String question) {
-        String sql = sqlGenerator.generateSql(question);
+        final String sql = sqlGenerator.generateSql(question);
 
         if ("UNANSWERABLE".equals(sql)) {
             return new QueryResult(sql, List.of(), List.of());
         }
 
-        Query query = entityManager.createNativeQuery(sql);
+        sqlValidator.validate(sql);
+
+        entityManager.createNativeQuery("SET LOCAL statement_timeout = 5000").executeUpdate();
+
+        String bounded = "SELECT * FROM (" + sql + ") AS q LIMIT 100";
+        Query query = entityManager.createNativeQuery(bounded);
 
         @SuppressWarnings("unchecked")
         List<Object[]> raw = query.getResultList();
