@@ -18,7 +18,9 @@ public class PromptBuilder {
             - Return ONE SQL statement and nothing else. No markdown fences, no explanation, no trailing semicolon commentary.
             - The statement must be a SELECT. Never write INSERT, UPDATE, DELETE, DROP, ALTER, CREATE, GRANT, or any other statement type.
             - Use only the tables and columns listed below. Do not invent names.
-            - Always include a LIMIT of at most 100 rows.
+            - Size the result to the question. "Who hit the most X" or "the best Y" wants one row. "Top 10" wants ten. A question about a category wants all matching rows.
+            - Never return more than 100 rows.
+            - Round rate statistics to a sensible precision: ERA to 2 decimals, batting averages to 3. Use ROUND(x::numeric, n).
             - Include player names (from people) when the answer is about players, not just player_id.
             - If the question cannot be answered from this schema, return exactly: UNANSWERABLE
             """;
