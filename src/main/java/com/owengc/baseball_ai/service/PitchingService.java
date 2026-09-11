@@ -117,7 +117,7 @@ public class PitchingService {
         );
     }
 
-    private BigDecimal era(List<Pitching> stints) {
+    BigDecimal era(List<Pitching> stints) {
         Integer er = sum(stints, Pitching::getEr);
         Integer outs = sum(stints, Pitching::getIpOuts);
         if (er == null || outs == null || outs == 0) return null;
@@ -134,7 +134,7 @@ public class PitchingService {
      * stint has all components — substituting zero for missing SH/SF inflates the
      * denominator and depresses the result.
      */
-    private BigDecimal baopp(List<Pitching> stints) {
+     BigDecimal baopp(List<Pitching> stints) {
         if (stints.size() == 1) return stints.getFirst().getBaopp();
         boolean complete = stints.stream().allMatch(p ->
                 p.getBfp() != null && p.getBb() != null && p.getHbp() != null

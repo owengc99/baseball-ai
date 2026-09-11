@@ -1,4 +1,4 @@
-package com.owengc.baseball_ai.com.service;
+package com.owengc.baseball_ai.service;
 
 import com.owengc.baseball_ai.exception.InvalidQueryException;
 import com.owengc.baseball_ai.service.SqlValidator;
