@@ -23,6 +23,12 @@ public class GeminiSqlGenerator implements SqlGenerator {
                               @Value("${gemini.api-key}") String apiKey,
                               @Value("${gemini.model}") String model,
                               @Value("${gemini.url}") String url) {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new IllegalStateException(
+                    "GEMINI_API_KEY is not set. The natural language query endpoint "
+                            + "cannot function without it.");
+        }
+
         this.promptBuilder = promptBuilder;
         this.apiKey = apiKey;
         this.model = model;
