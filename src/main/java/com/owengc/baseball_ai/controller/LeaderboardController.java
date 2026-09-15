@@ -6,9 +6,11 @@ import com.owengc.baseball_ai.enums.Span;
 import com.owengc.baseball_ai.service.LeaderboardService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
+@Tag(name = "Leaderboards", description = "Statistical leaders, career or single-season")
 @RestController
 @RequestMapping(value = "/api/leaderboards", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LeaderboardController {
@@ -19,6 +21,9 @@ public class LeaderboardController {
         this.leaderboardService = leaderboardService;
     }
 
+    @Operation(summary = "Batting leaders for a statistic",
+            description = "Ties are preserved — a limit of 10 may return more rows if "
+                    + "players tie at the boundary. Limit is capped at 100.")
     @GetMapping("/batting/{stat}")
     public List<LeaderboardEntry> getBattingLeaders(
             @PathVariable BattingStat stat,
