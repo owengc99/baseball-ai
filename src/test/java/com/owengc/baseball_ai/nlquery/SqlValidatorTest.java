@@ -1,7 +1,6 @@
-package com.owengc.baseball_ai.service;
+package com.owengc.baseball_ai.nlquery;
 
 import com.owengc.baseball_ai.exception.InvalidQueryException;
-import com.owengc.baseball_ai.service.SqlValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
