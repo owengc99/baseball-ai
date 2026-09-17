@@ -1,4 +1,4 @@
-package com.owengc.baseball_ai.service;
+package com.owengc.baseball_ai.nlquery;
 
 import org.springframework.stereotype.Component;
 

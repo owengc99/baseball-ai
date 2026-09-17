@@ -2,7 +2,7 @@ package com.owengc.baseball_ai.controller;
 
 import com.owengc.baseball_ai.dto.QueryRequest;
 import com.owengc.baseball_ai.dto.QueryResult;
-import com.owengc.baseball_ai.service.NlQueryService;
+import com.owengc.baseball_ai.nlquery.NlQueryService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.owengc.baseball_ai.service;
+package com.owengc.baseball_ai.nlquery;
 
 import com.owengc.baseball_ai.exception.InvalidQueryException;
 import org.springframework.stereotype.Component;
