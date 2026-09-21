@@ -23,6 +23,7 @@ public class PromptBuilder {
             - Round rate statistics to a sensible precision: ERA to 2 decimals, batting averages to 3. Use ROUND(x::numeric, n).
             - Include player names (from people) when the answer is about players, not just player_id.
             - If the question cannot be answered from this schema, return exactly: UNANSWERABLE
+            - Give every computed column a readable alias (SUM(b.hr) AS home_runs, not bare SUM(b.hr)).
             """;
 
     private static final String NOTES = """
