@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Instant;
@@ -37,6 +38,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleTimeout(QueryTimeoutException ex,
                                                        HttpServletRequest request) {
         return build(HttpStatus.GATEWAY_TIMEOUT, "Query exceeded the time limit", request);
+    }
+
+    @ExceptionHandler(HttpServerErrorException.class)
+    public ResponseEntity<ErrorResponse> handleUpstreamFailure(HttpServerErrorException ex,
+                                                               HttpServletRequest request) {
+        return build(HttpStatus.SERVICE_UNAVAILABLE,
+                "The query service is temporarily unavailable. Please try again shortly.",
+                request);
     }
 
     @ExceptionHandler(Exception.class)
