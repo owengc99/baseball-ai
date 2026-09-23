@@ -3,6 +3,8 @@ package com.owengc.baseball_ai.exception;
 import com.owengc.baseball_ai.dto.ErrorResponse;
 import jakarta.persistence.QueryTimeoutException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +16,8 @@ import java.time.Instant;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({PersonNotFoundException.class, TeamNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleNotFound(RuntimeException ex,
@@ -43,6 +47,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpServerErrorException.class)
     public ResponseEntity<ErrorResponse> handleUpstreamFailure(HttpServerErrorException ex,
                                                                HttpServletRequest request) {
+        log.warn("Upstream service failure on {}: {}", request.getRequestURI(), ex.getMessage());
         return build(HttpStatus.SERVICE_UNAVAILABLE,
                 "The query service is temporarily unavailable. Please try again shortly.",
                 request);
@@ -51,6 +56,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpected(Exception ex,
                                                           HttpServletRequest request) {
+        log.error("Unhandled exception on {}", request.getRequestURI(), ex);
         return build(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred", request);
     }
 
