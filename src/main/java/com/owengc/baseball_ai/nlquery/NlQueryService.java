@@ -1,6 +1,8 @@
 package com.owengc.baseball_ai.nlquery;
 
 import com.owengc.baseball_ai.dto.QueryResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 @Service
 public class NlQueryService {
 
+    private static final Logger log = LoggerFactory.getLogger(NlQueryService.class);
     private static final int MAX_ROWS = 100;
 
     private final SqlGenerator sqlGenerator;
@@ -34,6 +37,8 @@ public class NlQueryService {
         }
 
         sqlValidator.validate(sql);
+
+        log.info("Generated SQL for question [{}]: {}", question, sql);
 
         // Wrapping rather than setMaxResults: the model usually emits its own LIMIT,
         // and a second limit clause is a syntax error. Safe because the validator
