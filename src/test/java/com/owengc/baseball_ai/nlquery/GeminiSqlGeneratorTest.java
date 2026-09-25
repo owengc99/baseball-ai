@@ -9,12 +9,12 @@ class GeminiSqlGeneratorTest {
     @Test
     void failsFastWhenApiKeyIsBlank() {
         assertThrows(IllegalStateException.class,
-                () -> new GeminiSqlGenerator(null, "", "model", "http://localhost"));
+                () -> new GeminiSqlGenerator(null, null, "", "model", "http://localhost"));
     }
 
     @Test
     void failsFastWhenApiKeyIsNull() {
         assertThrows(IllegalStateException.class,
-                () -> new GeminiSqlGenerator(null, null, "model", "http://localhost"));
+                () -> new GeminiSqlGenerator(null, null, null, "model", "http://localhost"));
     }
 }
