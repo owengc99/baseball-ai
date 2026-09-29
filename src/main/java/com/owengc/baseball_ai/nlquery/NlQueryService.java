@@ -33,6 +33,7 @@ public class NlQueryService {
         String sql = sqlGenerator.generateSql(question);
 
         if ("UNANSWERABLE".equals(sql)) {
+            log.info("Model declined question as unanswerable: [{}]", question);
             return new QueryResult(sql, List.of(), List.of());
         }
 
