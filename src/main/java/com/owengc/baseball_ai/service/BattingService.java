@@ -64,7 +64,7 @@ public class BattingService {
         );
     }
 
-    private Integer sum(List<Batting> stints, Function<Batting, Integer> field) {
+    Integer sum(List<Batting> stints, Function<Batting, Integer> field) {
         List<Integer> values = stints.stream()
                 .map(field)
                 .filter(Objects::nonNull)
