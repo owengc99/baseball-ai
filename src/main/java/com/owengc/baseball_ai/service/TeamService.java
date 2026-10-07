@@ -48,7 +48,7 @@ public class TeamService {
                 .orElseThrow(() -> new TeamNotFoundException(teamId, yearId));
     }
 
-    private TeamDetail toDetail(Team team) {
+    TeamDetail toDetail(Team team) {
         return new TeamDetail(
                 team.getId().getTeamId(),
                 team.getId().getYearId(),
