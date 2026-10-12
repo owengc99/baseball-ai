@@ -66,7 +66,7 @@ public class FieldingService {
     }
 
     /** (PO + A) / (PO + A + E) — total chances handled cleanly. */
-    private BigDecimal fieldingPercentage(Fielding row) {
+     BigDecimal fieldingPercentage(Fielding row) {
         if (row.getPo() == null || row.getA() == null || row.getE() == null) return null;
 
         int successful = row.getPo() + row.getA();
